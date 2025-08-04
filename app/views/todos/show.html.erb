@@ -1,0 +1,56 @@
+<% provide(:title, "Todo Details") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Todo Details</h1>
+      
+      <div class="well">
+        <div class="row">
+          <div class="col-md-10">
+            <h3 class="<%= 'text-muted' if @todo.completed %>">
+              <% if @todo.completed %>
+                <span class="glyphicon glyphicon-ok text-success"></span>
+              <% else %>
+                <span class="glyphicon glyphicon-unchecked text-muted"></span>
+              <% end %>
+              <%= @todo.completed ? 'Completed' : 'Pending' %>
+            </h3>
+            
+            <div class="todo-text <%= 'text-muted' if @todo.completed %>">
+              <%= simple_format(@todo.text) %>
+            </div>
+            
+            <hr>
+            
+            <small class="text-muted">
+              <strong>Created:</strong> <%= @todo.created_at.strftime("%B %d, %Y at %I:%M %p") %><br>
+              <strong>Last updated:</strong> <%= @todo.updated_at.strftime("%B %d, %Y at %I:%M %p") %>
+            </small>
+          </div>
+        </div>
+      </div>
+      
+      <div class="btn-group" role="group">
+        <%= link_to toggle_todo_path(@todo), method: :patch, class: "btn btn-#{ @todo.completed ? 'warning' : 'success' }" do %>
+          <span class="glyphicon glyphicon-<%= @todo.completed ? 'remove' : 'ok' %>"></span>
+          <%= @todo.completed ? 'Mark Incomplete' : 'Mark Complete' %>
+        <% end %>
+        
+        <%= link_to edit_todo_path(@todo), class: "btn btn-primary" do %>
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        <% end %>
+        
+        <%= link_to todo_path(@todo), method: :delete, 
+                    data: { confirm: 'Are you sure you want to delete this todo?' }, 
+                    class: "btn btn-danger" do %>
+          <span class="glyphicon glyphicon-trash"></span> Delete
+        <% end %>
+        
+        <%= link_to todos_path, class: "btn btn-default" do %>
+          <span class="glyphicon glyphicon-arrow-left"></span> Back to List
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

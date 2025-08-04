@@ -1,0 +1,52 @@
+<div class="todo-item well <%= 'completed' if todo.completed %>">
+  <div class="row">
+    <div class="col-md-1">
+      <%= link_to toggle_todo_path(todo), method: :patch, class: "btn btn-sm #{'btn-success' if todo.completed} #{'btn-default' unless todo.completed}" do %>
+        <% if todo.completed %>
+          <span class="glyphicon glyphicon-ok"></span>
+        <% else %>
+          <span class="glyphicon glyphicon-unchecked"></span>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="col-md-9">
+      <p class="todo-text <%= 'text-muted' if todo.completed %>">
+        <%= simple_format(todo.text) %>
+      </p>
+      <small class="text-muted">
+        Created <%= time_ago_in_words(todo.created_at) %> ago
+        <% if todo.completed %>
+          • Completed
+        <% end %>
+      </small>
+    </div>
+    
+    <div class="col-md-2 text-right">
+      <%= link_to edit_todo_path(todo), class: "btn btn-sm btn-default" do %>
+        <span class="glyphicon glyphicon-edit"></span> Edit
+      <% end %>
+      
+      <%= link_to todo_path(todo), method: :delete, 
+                  data: { confirm: 'Are you sure?' }, 
+                  class: "btn btn-sm btn-danger" do %>
+        <span class="glyphicon glyphicon-trash"></span>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .todo-item.completed .todo-text {
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+  
+  .todo-item {
+    margin-bottom: 10px;
+  }
+  
+  .todo-text {
+    margin-bottom: 5px;
+  }
+</style>
