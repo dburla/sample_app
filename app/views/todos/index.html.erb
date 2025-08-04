@@ -1,0 +1,54 @@
+<% provide(:title, "Todo List") %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>My Todo List</h1>
+      
+      <!-- Add new todo form -->
+      <div class="well">
+        <%= form_for(@todo, local: true) do |f| %>
+          <% if @todo.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+                <% @todo.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          
+          <div class="form-group">
+            <%= f.text_area :text, class: "form-control", placeholder: "What needs to be done?", rows: 2 %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.submit "Add Todo", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      
+      <!-- Todo list -->
+      <% if @todos.any? %>
+        <h3>
+          Todos 
+          <small>
+            (<%= @todos.incomplete.count %> remaining, 
+             <%= @todos.completed.count %> completed)
+          </small>
+        </h3>
+        
+        <div class="todo-list">
+          <% @todos.each do |todo| %>
+            <%= render 'todo', todo: todo %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="well text-center">
+          <h3>No todos yet!</h3>
+          <p>Add your first todo above to get started.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

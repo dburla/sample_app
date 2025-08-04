@@ -1,0 +1,84 @@
+/* Todo List Styles */
+
+body {
+  padding-top: 60px; /* Account for fixed navbar */
+}
+
+.jumbotron {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-item {
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  border-left: 4px solid #007bff;
+}
+
+.todo-item.completed {
+  border-left-color: #28a745;
+  background-color: #f8f9fa;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todo-text {
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.todo-item .btn {
+  margin-right: 5px;
+}
+
+.todo-item .glyphicon {
+  font-size: 14px;
+}
+
+/* Flash messages */
+.alert {
+  margin-top: 20px;
+}
+
+/* Forms */
+.well {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  resize: vertical;
+}
+
+/* Navigation */
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-nav li a {
+  padding: 15px 20px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .col-md-offset-2 {
+    margin-left: 0;
+  }
+  
+  .todo-item .col-md-1,
+  .todo-item .col-md-9,
+  .todo-item .col-md-2 {
+    margin-bottom: 10px;
+  }
+  
+  .todo-item .text-right {
+    text-align: left !important;
+  }
+}
